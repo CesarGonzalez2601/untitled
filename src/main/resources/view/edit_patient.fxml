@@ -1,0 +1,21 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.scene.control.Button?>
+<?import javafx.scene.control.ComboBox?>
+<?import javafx.scene.layout.VBox?>
+
+<VBox alignment="CENTER" spacing="10" xmlns="http://javafx.com/javafx/8" xmlns:fx="http://javafx.com/fxml/1"
+      fx:controller="org.example.controller.EditPatientController">
+
+    <!-- ComboBox para seleccionar un paciente -->
+    <ComboBox fx:id="patientComboBox" promptText="Selecciona un Paciente" />
+
+    <!-- Campos de edición con ComboBox -->
+    <ComboBox fx:id="genderComboBox" promptText="Género" />
+    <ComboBox fx:id="bloodTypeComboBox" promptText="Tipo de Sangre" />
+    <ComboBox fx:id="bloodPressureComboBox" promptText="Presión Arterial" />
+
+    <!-- Botón para actualizar -->
+    <Button text="Actualizar Paciente" onAction="#handleUpdatePatient" />
+
+</VBox>

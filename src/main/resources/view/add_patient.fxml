@@ -1,0 +1,55 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.scene.control.Button?>
+<?import javafx.scene.control.ComboBox?>
+<?import javafx.scene.control.Label?>
+<?import javafx.scene.control.TextField?>
+<?import javafx.scene.layout.GridPane?>
+
+<?import java.lang.String?>
+<?import javafx.collections.FXCollections?>
+<GridPane alignment="CENTER" hgap="10" vgap="10" xmlns="http://javafx.com/javafx/8" xmlns:fx="http://javafx.com/fxml/1"
+          fx:controller="org.example.controller.AddPatientController">
+
+    <Label text="Nombre:" GridPane.rowIndex="0" GridPane.columnIndex="0"/>
+    <TextField fx:id="nameField" GridPane.rowIndex="0" GridPane.columnIndex="1"/>
+
+    <Label text="Género:" GridPane.rowIndex="1" GridPane.columnIndex="0"/>
+    <ComboBox fx:id="genderComboBox" GridPane.rowIndex="1" GridPane.columnIndex="1">
+        <items>
+            <FXCollections fx:factory="observableArrayList">
+                <String fx:value="Hombre"/>
+                <String fx:value="Mujer"/>
+            </FXCollections>
+        </items>
+    </ComboBox>
+
+    <Label text="Tipo de Sangre:" GridPane.rowIndex="2" GridPane.columnIndex="0"/>
+    <ComboBox fx:id="bloodTypeComboBox" GridPane.rowIndex="2" GridPane.columnIndex="1">
+        <items>
+            <FXCollections fx:factory="observableArrayList">
+                <String fx:value="A"/>
+                <String fx:value="B"/>
+                <String fx:value="AB"/>
+                <String fx:value="O"/>
+            </FXCollections>
+        </items>
+    </ComboBox>
+
+    <Label text="Presión Arterial:" GridPane.rowIndex="3" GridPane.columnIndex="0"/>
+    <ComboBox fx:id="pressureComboBox" GridPane.rowIndex="3" GridPane.columnIndex="1">
+        <items>
+            <FXCollections fx:factory="observableArrayList">
+                <String fx:value="Alta"/>
+                <String fx:value="Media"/>
+                <String fx:value="Baja"/>
+            </FXCollections>
+        </items>
+    </ComboBox>
+
+    <Button text="Agregar Paciente" onAction="#handleAddPatient" GridPane.rowIndex="4" GridPane.columnIndex="1"/>
+
+    <!-- Botón de regreso -->
+    <Button text="Atrás" onAction="#handleBack" GridPane.rowIndex="5" GridPane.columnIndex="1"/>
+
+</GridPane>

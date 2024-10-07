@@ -1,0 +1,46 @@
+/* login.css */
+
+/* Estilo para el GridPane */
+.grid-pane {
+    -fx-padding: 20;
+    -fx-hgap: 10;
+    -fx-vgap: 10;
+    -fx-alignment: center;
+    -fx-background-color: #F0F4F8;
+}
+
+/* Estilo para las etiquetas */
+.label {
+    -fx-font-size: 14px;
+    -fx-font-weight: bold;
+    -fx-text-fill: #333333;
+}
+
+/* Estilo para los TextField y PasswordField */
+.text-field, .password-field {
+    -fx-font-size: 14px;
+    -fx-border-color: #CCCCCC;
+    -fx-border-radius: 5;
+    -fx-background-radius: 5;
+}
+
+/* Estilo para los botones */
+.button {
+    -fx-background-color: #4CAF50;
+    -fx-text-fill: white;
+    -fx-font-weight: bold;
+    -fx-border-radius: 5;
+    -fx-background-radius: 5;
+    -fx-padding: 10;
+}
+
+.button:hover {
+    -fx-background-color: #45A049;
+}
+
+/* Estilo para la imagen */
+.image-view {
+    -fx-effect: dropshadow(gaussian, rgba(0,0,0,0.25), 10, 0.5, 0, 0);
+    -fx-margin-bottom: 20px;
+}
+
