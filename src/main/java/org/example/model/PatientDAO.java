@@ -94,4 +94,32 @@ public class PatientDAO {
             e.printStackTrace();
         }
     }
+
+    // Método para obtener un paciente por su ID
+    public Patient obtenerPacientePorId(int id) {
+        Patient paciente = null;
+        String sql = "SELECT id, nombre, genero, tipo_sangre, presion_arterial FROM pacientes WHERE id = ?";
+
+        try (Connection connection = DatabaseConnection.getConnection(); // Asegúrate de tener una clase de conexión a la base de datos
+             PreparedStatement preparedStatement = connection.prepareStatement(sql)) {
+
+            preparedStatement.setInt(1, id); // Establece el ID en la consulta
+
+            try (ResultSet resultSet = preparedStatement.executeQuery()) {
+                if (resultSet.next()) {
+                    // Crea un nuevo objeto Patient con los datos obtenidos
+                    paciente = new Patient();
+                    paciente.setId(resultSet.getInt("id"));
+                    paciente.setNombre(resultSet.getString("nombre"));
+                    paciente.setGenero(resultSet.getString("genero"));
+                    paciente.setTipoSangre(resultSet.getString("tipo_sangre"));
+                    paciente.setPresionArterial(resultSet.getString("presion_arterial"));
+                }
+            }
+        } catch (SQLException e) {
+            e.printStackTrace(); // Maneja la excepción de forma adecuada
+        }
+
+        return paciente; // Retorna el paciente encontrado o null si no se encontró
+    }
 }
