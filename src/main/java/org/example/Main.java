@@ -11,8 +11,12 @@ public class Main extends Application {
     @Override
     public void start(Stage primaryStage) throws Exception {
         Parent root = FXMLLoader.load(getClass().getResource("/view/login.fxml"));
+
+        // Establecer el tamaño grande inicial para la ventana
+        Scene scene = new Scene(root, 800, 600); // 800 de ancho, 600 de alto
+
         primaryStage.setTitle("Login");
-        primaryStage.setScene(new Scene(root, 300, 200));
+        primaryStage.setScene(scene);
         primaryStage.show();
     }
 

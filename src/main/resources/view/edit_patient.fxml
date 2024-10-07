@@ -2,20 +2,74 @@
 
 <?import javafx.scene.control.Button?>
 <?import javafx.scene.control.ComboBox?>
-<?import javafx.scene.layout.VBox?>
+<?import javafx.scene.control.TextField?>
+<?import javafx.scene.control.*?>
+<?import javafx.scene.layout.*?>
 
-<VBox alignment="CENTER" spacing="10" xmlns="http://javafx.com/javafx/8" xmlns:fx="http://javafx.com/fxml/1"
-      fx:controller="org.example.controller.EditPatientController">
+<?import javafx.collections.FXCollections?>
+<?import java.lang.String?>
+<AnchorPane xmlns:fx="http://javafx.com/fxml"
+            fx:controller="org.example.controller.EditPatientController"
+            style="-fx-background-color: #2c3e50; -fx-padding: 20px;">
+    <children>
+        <Label text="Editar Paciente" layoutX="20.0" layoutY="10.0"
+               style="-fx-text-fill: white; -fx-font-size: 18px;"/>
 
-    <!-- ComboBox para seleccionar un paciente -->
-    <ComboBox fx:id="patientComboBox" promptText="Selecciona un Paciente" />
+        <Label text="Seleccione Paciente:" layoutX="20.0" layoutY="40.0"
+               style="-fx-text-fill: white; -fx-font-size: 14px;"/>
+        <ComboBox fx:id="patientComboBox" layoutX="150.0" layoutY="40.0" prefWidth="200.0"
+                  style="-fx-font-size: 14px; -fx-background-radius: 5px;"/>
 
-    <!-- Campos de edición con ComboBox -->
-    <ComboBox fx:id="genderComboBox" promptText="Género" />
-    <ComboBox fx:id="bloodTypeComboBox" promptText="Tipo de Sangre" />
-    <ComboBox fx:id="bloodPressureComboBox" promptText="Presión Arterial" />
+        <Label text="Nombre:" layoutX="20.0" layoutY="80.0"
+               style="-fx-text-fill: white; -fx-font-size: 14px;"/>
+        <TextField fx:id="nameField" layoutX="150.0" layoutY="80.0" prefWidth="200.0"
+                   style="-fx-font-size: 14px; -fx-background-radius: 5px;"/>
 
-    <!-- Botón para actualizar -->
-    <Button text="Actualizar Paciente" onAction="#handleUpdatePatient" />
+        <Label text="Género:" layoutX="20.0" layoutY="120.0"
+               style="-fx-text-fill: white; -fx-font-size: 14px;"/>
+        <ComboBox fx:id="genderComboBox" layoutX="150.0" layoutY="120.0" prefWidth="200.0"
+                  style="-fx-font-size: 14px; -fx-background-radius: 5px;">
+            <items>
+                <FXCollections fx:factory="observableArrayList">
+                    <String fx:value="Hombre"/>
+                    <String fx:value="Mujer"/>
+                </FXCollections>
+            </items>
+        </ComboBox>
 
-</VBox>
+        <Label text="Tipo de Sangre:" layoutX="20.0" layoutY="160.0"
+               style="-fx-text-fill: white; -fx-font-size: 14px;"/>
+        <ComboBox fx:id="bloodTypeComboBox" layoutX="150.0" layoutY="160.0" prefWidth="200.0"
+                  style="-fx-font-size: 14px; -fx-background-radius: 5px;">
+            <items>
+                <FXCollections fx:factory="observableArrayList">
+                    <String fx:value="A"/>
+                    <String fx:value="B"/>
+                    <String fx:value="AB"/>
+                    <String fx:value="O"/>
+                </FXCollections>
+            </items>
+        </ComboBox>
+
+        <Label text="Presión Arterial:" layoutX="20.0" layoutY="200.0"
+               style="-fx-text-fill: white; -fx-font-size: 14px;"/>
+        <ComboBox fx:id="bloodPressureComboBox" layoutX="150.0" layoutY="200.0" prefWidth="200.0"
+                  style="-fx-font-size: 14px; -fx-background-radius: 5px;">
+            <items>
+                <FXCollections fx:factory="observableArrayList">
+                    <String fx:value="Alta"/>
+                    <String fx:value="Media"/>
+                    <String fx:value="Baja"/>
+                </FXCollections>
+            </items>
+        </ComboBox>
+
+        <Button text="Actualizar" layoutX="150.0" layoutY="250.0" prefWidth="100.0"
+                style="-fx-background-color: #1abc9c; -fx-text-fill: white; -fx-font-size: 14px;"
+                onAction="#handleUpdatePatient"/>
+
+        <Button text="Atrás" layoutX="270.0" layoutY="250.0" prefWidth="80.0"
+                style="-fx-background-color: #e74c3c; -fx-text-fill: white; -fx-font-size: 14px;"
+                onAction="#handleGoBack"/>
+    </children>
+</AnchorPane>

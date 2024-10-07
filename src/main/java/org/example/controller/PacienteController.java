@@ -1,6 +1,9 @@
 package org.example.controller;
 
 import javafx.fxml.FXML;
+import javafx.fxml.FXMLLoader;
+import javafx.scene.Parent;
+import javafx.scene.Scene;
 import javafx.scene.canvas.Canvas;
 import javafx.scene.canvas.GraphicsContext;
 import javafx.scene.control.TextField;
@@ -13,6 +16,7 @@ import org.example.model.PatientDAO;
 import org.example.model.ArbolDeClasificacion;
 
 
+import java.io.IOException;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -185,11 +189,21 @@ public class PacienteController {
 
     @FXML
     private void handleBack() {
-        // Asegúrate de no depender de nameField si no es necesario
-        // Puedes simplemente cerrar la ventana o cambiar de escena sin hacer referencia a nameField
+
         Stage stage = (Stage) canvas.getScene().getWindow();
         stage.close();
-    }
 
+        try {
+            FXMLLoader loader = new FXMLLoader(getClass().getResource("/view/main_view.fxml"));
+            Parent root = loader.load();
+
+            Stage mainStage = new Stage();
+            mainStage.setTitle("Main");
+            mainStage.setScene(new Scene(root, 800, 600)); // Establece el tamaño de la ventana aquí
+            mainStage.show();
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
+    }
 
 }

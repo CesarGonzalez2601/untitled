@@ -21,12 +21,12 @@ public class PatientDAO {
 
             ps.executeUpdate();
 
-        } catch (Exception e) {
+        } catch (SQLException e) {
             e.printStackTrace();
         }
     }
 
-    // Método para recuperar todos los pacientes
+    // Método para recuperar todos los pacientes (devuelve todos los datos del paciente)
     public List<Patient> getAllPatients() {
         List<Patient> patients = new ArrayList<>();
         try (Connection conn = DatabaseConnection.getConnection()) {
@@ -51,22 +51,7 @@ public class PatientDAO {
         return patients;
     }
 
-    public void updatePatient(Patient patient) {
-        try (Connection conn = DatabaseConnection.getConnection()) {
-            String query = "UPDATE pacientes SET genero = ?, tipo_sangre = ?, presion_arterial = ? WHERE id = ?";
-            PreparedStatement ps = conn.prepareStatement(query);
-            ps.setString(1, patient.getGenero());
-            ps.setString(2, patient.getTipoSangre());
-            ps.setString(3, patient.getPresionArterial());
-            ps.setInt(4, patient.getId());
-
-            ps.executeUpdate(); // Ejecuta la actualización
-
-        } catch (Exception e) {
-            e.printStackTrace();
-        }
-    }
-
+    // Método para recuperar todos los pacientes (devuelve solo nombre, género, tipo de sangre y presión arterial)
     public List<Patient> obtenerTodosLosPacientes() {
         List<Patient> pacientes = new ArrayList<>();
         String sql = "SELECT nombre, genero, tipo_sangre, presion_arterial FROM pacientes";
@@ -90,5 +75,23 @@ public class PatientDAO {
         }
 
         return pacientes;
+    }
+
+    // Método para actualizar los datos de un paciente existente
+    public void updatePatient(Patient patient) {
+        try (Connection conn = DatabaseConnection.getConnection()) {
+            String query = "UPDATE pacientes SET nombre = ?, genero = ?, tipo_sangre = ?, presion_arterial = ? WHERE id = ?";
+            PreparedStatement ps = conn.prepareStatement(query);
+            ps.setString(1, patient.getNombre());
+            ps.setString(2, patient.getGenero());
+            ps.setString(3, patient.getTipoSangre());
+            ps.setString(4, patient.getPresionArterial());
+            ps.setInt(5, patient.getId());
+
+            ps.executeUpdate(); // Ejecuta la actualización
+
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
     }
 }

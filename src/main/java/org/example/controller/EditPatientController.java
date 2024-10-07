@@ -1,49 +1,64 @@
 package org.example.controller;
 
 import javafx.collections.FXCollections;
+import javafx.collections.ObservableList;
 import javafx.fxml.FXML;
+import javafx.fxml.FXMLLoader;
+import javafx.scene.Parent;
+import javafx.scene.Scene;
 import javafx.scene.control.ComboBox;
+import javafx.scene.control.ListCell;
+import javafx.scene.control.ListView;
 import javafx.scene.control.TextField;
-import javafx.scene.control.Button;
+import javafx.stage.Stage;
+import javafx.util.Callback;
 import org.example.model.Patient;
 import org.example.model.PatientDAO;
 
+import java.io.IOException;
 import java.util.List;
 
 public class EditPatientController {
 
     @FXML
     private ComboBox<Patient> patientComboBox;
-
+    @FXML
+    private TextField nameField;
     @FXML
     private ComboBox<String> genderComboBox;
-
     @FXML
     private ComboBox<String> bloodTypeComboBox;
-
     @FXML
     private ComboBox<String> bloodPressureComboBox;
 
-    @FXML
-    private TextField nameField;
-
-    @FXML
-    private Button updateButton;
-
-    private PatientDAO patientDAO = new PatientDAO();
+    private ObservableList<Patient> patients;
 
     @FXML
     public void initialize() {
-        // Cargar la lista de pacientes en el ComboBox
-        List<Patient> patients = patientDAO.getAllPatients();
-        patientComboBox.setItems(FXCollections.observableArrayList(patients));
+        PatientDAO patientDAO = new PatientDAO();
+        List<Patient> patientList = patientDAO.getAllPatients();
+        patients = FXCollections.observableArrayList(patientList);
 
-        // Inicializar opciones de los ComboBox de género, tipo de sangre y presión arterial
-        genderComboBox.setItems(FXCollections.observableArrayList("Masculino", "Femenino", "Otro"));
-        bloodTypeComboBox.setItems(FXCollections.observableArrayList("A", "B", "AB", "O"));
-        bloodPressureComboBox.setItems(FXCollections.observableArrayList("Alta", "Normal", "Baja"));
+        patientComboBox.setItems(patients);
 
-        // Manejar la selección del paciente y llenar los campos correspondientes
+        // Personalizar cómo se muestran los pacientes
+        patientComboBox.setCellFactory(new Callback<ListView<Patient>, ListCell<Patient>>() {
+            @Override
+            public ListCell<Patient> call(ListView<Patient> param) {
+                return new ListCell<Patient>() {
+                    @Override
+                    protected void updateItem(Patient item, boolean empty) {
+                        super.updateItem(item, empty);
+                        if (item == null || empty) {
+                            setText(null);
+                        } else {
+                            setText("ID: " + item.getId() + " - " + item.getNombre());
+                        }
+                    }
+                };
+            }
+        });
+
         patientComboBox.setOnAction(event -> {
             Patient selectedPatient = patientComboBox.getSelectionModel().getSelectedItem();
             if (selectedPatient != null) {
@@ -56,22 +71,35 @@ public class EditPatientController {
     }
 
     @FXML
-    private void handleUpdatePatient() {
-        // Obtener el paciente seleccionado
+    public void handleUpdatePatient() {
         Patient selectedPatient = patientComboBox.getSelectionModel().getSelectedItem();
         if (selectedPatient != null) {
-            // Actualizar los datos del paciente con los valores de los campos
             selectedPatient.setNombre(nameField.getText());
             selectedPatient.setGenero(genderComboBox.getValue());
             selectedPatient.setTipoSangre(bloodTypeComboBox.getValue());
             selectedPatient.setPresionArterial(bloodPressureComboBox.getValue());
 
-            // Actualizar el paciente en la base de datos
+            PatientDAO patientDAO = new PatientDAO();
             patientDAO.updatePatient(selectedPatient);
+        }
+    }
 
-            // Mostrar un mensaje de confirmación o refrescar la interfaz, si es necesario
-            System.out.println("Paciente actualizado correctamente.");
+    @FXML
+    public void handleGoBack() throws IOException {
+
+        Stage stage = (Stage) patientComboBox.getScene().getWindow();
+        stage.close();  // Cierra la ventana actual
+
+        try {
+            FXMLLoader loader = new FXMLLoader(getClass().getResource("/view/main_view.fxml"));
+            Parent root = loader.load();
+
+            Stage mainStage = new Stage();
+            mainStage.setTitle("Main");
+            mainStage.setScene(new Scene(root, 800, 600)); // Establece el tamaño de la ventana aquí
+            mainStage.show();
+        } catch (IOException e) {
+            e.printStackTrace();
         }
     }
 }
-

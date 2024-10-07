@@ -1,13 +1,17 @@
 package org.example.controller;
 
 import javafx.fxml.FXML;
-import javafx.scene.control.TextField;
-import javafx.scene.control.ComboBox;
+import javafx.fxml.FXMLLoader;
+import javafx.scene.Parent;
+import javafx.scene.Scene;
 import javafx.scene.control.Alert;
-import javafx.scene.control.Alert.AlertType;
+import javafx.scene.control.ComboBox;
+import javafx.scene.control.TextField;
 import javafx.stage.Stage;
 import org.example.model.Patient;
 import org.example.model.PatientDAO;
+
+import java.io.IOException;
 
 public class AddPatientController {
 
@@ -35,7 +39,7 @@ public class AddPatientController {
 
         // Validar que todos los campos estén llenos
         if (name.isEmpty() || gender == null || bloodType == null || pressure == null) {
-            Alert alert = new Alert(AlertType.ERROR);
+            Alert alert = new Alert(Alert.AlertType.ERROR);
             alert.setTitle("Error");
             alert.setHeaderText(null);
             alert.setContentText("Por favor, completa todos los campos.");
@@ -46,13 +50,13 @@ public class AddPatientController {
             try {
                 patientDAO.addPatient(patient);
 
-                Alert alert = new Alert(AlertType.INFORMATION);
+                Alert alert = new Alert(Alert.AlertType.INFORMATION);
                 alert.setTitle("Paciente Agregado");
                 alert.setHeaderText(null);
                 alert.setContentText("Paciente agregado exitosamente.");
                 alert.showAndWait();
             } catch (Exception e) {
-                Alert alert = new Alert(AlertType.ERROR);
+                Alert alert = new Alert(Alert.AlertType.ERROR);
                 alert.setTitle("Error al agregar el paciente");
                 alert.setHeaderText(null);
                 alert.setContentText("Hubo un error al agregar el paciente: " + e.getMessage());
@@ -63,9 +67,23 @@ public class AddPatientController {
 
     @FXML
     private void handleBack() {
-        // Obtener la ventana actual y cerrarla
+        // Cerrar la ventana actual
         Stage stage = (Stage) nameField.getScene().getWindow();
         stage.close();
+
+        // Volver a cargar la ventana principal (MainController)
+        try {
+            FXMLLoader loader = new FXMLLoader(getClass().getResource("/view/main_view.fxml"));
+            Parent root = loader.load();
+
+            Stage mainStage = new Stage();
+            mainStage.setTitle("Main");
+            mainStage.setScene(new Scene(root, 800, 600)); // Establece el tamaño de la ventana aquí
+            mainStage.show();
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
     }
 }
+
 
