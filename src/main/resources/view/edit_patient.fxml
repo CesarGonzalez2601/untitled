@@ -1,0 +1,112 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.scene.control.Button?>
+<?import javafx.scene.control.ComboBox?>
+<?import javafx.scene.control.TextField?>
+<?import javafx.scene.control.Label?>
+<?import javafx.scene.layout.VBox?>
+<?import javafx.scene.layout.HBox?>
+<?import javafx.geometry.Insets?>
+<?import javafx.geometry.Pos?>
+<?import javafx.collections.FXCollections?>
+<?import java.lang.String?>
+<?import javafx.scene.image.ImageView?>
+
+<?import javafx.scene.image.Image?>
+<VBox xmlns:fx="http://javafx.com/fxml"
+      fx:controller="org.example.controller.EditPatientController"
+      spacing="20" alignment="CENTER" style="-fx-background-color: #2c3e50; -fx-padding: 30px; -fx-alignment: center;">
+
+    <ImageView fx:id="logoImageView" fitWidth="150" fitHeight="150" style="-fx-effect: dropshadow(gaussian, rgba(0,0,0,0.25), 15, 0, 0, 10);">
+        <image>
+            <Image url="/view/paciente.png"/>
+        </image>
+    </ImageView>
+
+    <children>
+        <Label text="Editar Paciente"
+               style="-fx-text-fill: white; -fx-font-size: 18px;"/>
+
+        <VBox alignment="CENTER" spacing="15">
+            <HBox alignment="CENTER" spacing="20">
+                <Label text="Seleccione Paciente:"
+                       style="-fx-text-fill: white; -fx-font-size: 14px;"/>
+                <ComboBox fx:id="patientComboBox" prefWidth="250.0"
+                          style="-fx-font-size: 14px; -fx-background-radius: 5px;"/>
+            </HBox>
+
+            <HBox alignment="CENTER" spacing="20">
+                <Label text="Nombre:"
+                       style="-fx-text-fill: white; -fx-font-size: 14px;"/>
+                <TextField fx:id="nameField" prefWidth="250.0"
+                           style="-fx-font-size: 14px; -fx-background-radius: 5px;"/>
+            </HBox>
+
+            <HBox alignment="CENTER" spacing="20">
+                <Label text="Género:"
+                       style="-fx-text-fill: white; -fx-font-size: 14px;"/>
+                <ComboBox fx:id="genderComboBox" prefWidth="250.0"
+                          style="-fx-font-size: 14px; -fx-background-radius: 5px;">
+                    <items>
+                        <FXCollections fx:factory="observableArrayList">
+                            <String fx:value="Hombre"/>
+                            <String fx:value="Mujer"/>
+                        </FXCollections>
+                    </items>
+                </ComboBox>
+            </HBox>
+
+            <HBox alignment="CENTER" spacing="20">
+                <Label text="Tipo de Sangre:"
+                       style="-fx-text-fill: white; -fx-font-size: 14px;"/>
+                <ComboBox fx:id="bloodTypeComboBox" prefWidth="250.0"
+                          style="-fx-font-size: 14px; -fx-background-radius: 5px;">
+                    <items>
+                        <FXCollections fx:factory="observableArrayList">
+                            <String fx:value="A"/>
+                            <String fx:value="B"/>
+                            <String fx:value="AB"/>
+                            <String fx:value="O"/>
+                        </FXCollections>
+                    </items>
+                </ComboBox>
+            </HBox>
+
+            <HBox alignment="CENTER" spacing="20">
+                <Label text="Presión Arterial:"
+                       style="-fx-text-fill: white; -fx-font-size: 14px;"/>
+                <ComboBox fx:id="bloodPressureComboBox" prefWidth="250.0"
+                          style="-fx-font-size: 14px; -fx-background-radius: 5px;">
+                    <items>
+                        <FXCollections fx:factory="observableArrayList">
+                            <String fx:value="Alta"/>
+                            <String fx:value="Media"/>
+                            <String fx:value="Baja"/>
+                        </FXCollections>
+                    </items>
+                </ComboBox>
+            </HBox>
+        </VBox>
+
+        <VBox alignment="CENTER" spacing="10">
+            <HBox alignment="CENTER" spacing="20">
+                <Button text="Actualizar" prefWidth="120.0"
+                        style="-fx-background-color: #1abc9c; -fx-text-fill: white; -fx-font-size: 14px;"
+                        onAction="#handleUpdatePatient"/>
+
+                <Button text="Atrás" prefWidth="120.0"
+                        style="-fx-background-color: #e74c3c; -fx-text-fill: white; -fx-font-size: 14px;"
+                        onAction="#handleGoBack"/>
+            </HBox>
+
+            <Button text="Clasificar Paciente" prefWidth="250.0"
+                    style="-fx-background-color: #3498db; -fx-text-fill: white; -fx-font-size: 14px;"
+                    onAction="#handleClassifyPatient"/>
+
+            <Button text="Eliminar Paciente" prefWidth="250.0"
+                    style="-fx-background-color: #e67e22; -fx-text-fill: white; -fx-font-size: 14px;"
+                    onAction="#handleDeletePatient"/>
+        </VBox>
+    </children>
+</VBox>
+

@@ -1,0 +1,20 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.scene.control.TextField?>
+<?import javafx.scene.layout.VBox?>
+<?import javafx.scene.canvas.Canvas?>
+<?import javafx.scene.control.Button?>
+
+<VBox xmlns:fx="http://javafx.com/fxml" fx:controller="org.example.controller.PacienteController" spacing="20" alignment="TOP_CENTER"
+      style="-fx-background-color: linear-gradient(to bottom, #34495e, #2c3e50); -fx-padding: 30px;">
+
+    <TextField fx:id="nameField" editable="false" style="-fx-font-size: 16px; -fx-background-color: white;"/>
+
+    <VBox alignment="TOP_CENTER" style="-fx-background-color: #ecf0f1; -fx-padding: 10px; -fx-background-radius: 10; -fx-effect: dropshadow(three-pass-box, rgba(0,0,0,0.3), 15, 0, 0, 10);">
+        <Canvas fx:id="canvas" width="1000" height="500" style="-fx-background-color: white; -fx-border-color: #2c3e50; -fx-border-width: 2px;"/>
+    </VBox>
+
+    <Button text="Regresar" onAction="#handleBack"
+            style="-fx-font-size: 16px; -fx-font-weight: bold; -fx-text-fill: white; -fx-background-color: #e74c3c; -fx-background-radius: 15; -fx-padding: 10px 20px; -fx-effect: dropshadow(three-pass-box, rgba(0,0,0,0.4), 10, 0, 0, 10);"/>
+</VBox>
+

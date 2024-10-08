@@ -1,0 +1,78 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.scene.control.Button?>
+<?import javafx.scene.control.ComboBox?>
+<?import javafx.scene.control.Label?>
+<?import javafx.scene.control.TextField?>
+<?import javafx.scene.image.ImageView?>
+<?import javafx.scene.layout.GridPane?>
+<?import javafx.scene.layout.VBox?>
+<?import java.lang.String?>
+<?import javafx.collections.FXCollections?>
+
+<?import javafx.scene.image.Image?>
+<VBox xmlns="http://javafx.com/javafx/8" xmlns:fx="http://javafx.com/fxml/1" fx:controller="org.example.controller.AddPatientController"
+      alignment="CENTER" spacing="20" style="-fx-background-color: linear-gradient(to bottom, #2c3e50, #4ca1af); -fx-padding: 30;">
+
+    <ImageView fx:id="logoImageView" fitWidth="150" fitHeight="150" style="-fx-effect: dropshadow(gaussian, rgba(0,0,0,0.25), 15, 0, 0, 10);">
+        <image>
+            <Image url="/view/paciente.png"/>
+        </image>
+    </ImageView>
+
+    <GridPane alignment="CENTER" hgap="10" vgap="10" style="-fx-hgap: 20px; -fx-vgap: 15px; -fx-border-radius: 10px; -fx-effect: dropshadow(gaussian, rgba(0,0,0,0.25), 10, 0, 0, 10);">
+
+        <Label text="Nombre:" GridPane.rowIndex="0" GridPane.columnIndex="0"
+               style="-fx-text-fill: white; -fx-font-size: 16px;"/>
+        <TextField fx:id="nameField" GridPane.rowIndex="0" GridPane.columnIndex="1"
+                   style="-fx-font-size: 14px; -fx-background-radius: 5px; -fx-padding: 5px;"/>
+
+        <Label text="Género:" GridPane.rowIndex="1" GridPane.columnIndex="0"
+               style="-fx-text-fill: white; -fx-font-size: 16px;"/>
+        <ComboBox fx:id="genderComboBox" GridPane.rowIndex="1" GridPane.columnIndex="1"
+                  style="-fx-font-size: 14px; -fx-background-radius: 5px;">
+            <items>
+                <FXCollections fx:factory="observableArrayList">
+                    <String fx:value="Hombre"/>
+                    <String fx:value="Mujer"/>
+                </FXCollections>
+            </items>
+        </ComboBox>
+
+        <Label text="Tipo de Sangre:" GridPane.rowIndex="2" GridPane.columnIndex="0"
+               style="-fx-text-fill: white; -fx-font-size: 16px;"/>
+        <ComboBox fx:id="bloodTypeComboBox" GridPane.rowIndex="2" GridPane.columnIndex="1"
+                  style="-fx-font-size: 14px; -fx-background-radius: 5px;">
+            <items>
+                <FXCollections fx:factory="observableArrayList">
+                    <String fx:value="A"/>
+                    <String fx:value="B"/>
+                    <String fx:value="AB"/>
+                    <String fx:value="O"/>
+                </FXCollections>
+            </items>
+        </ComboBox>
+
+        <Label text="Presión Arterial:" GridPane.rowIndex="3" GridPane.columnIndex="0"
+               style="-fx-text-fill: white; -fx-font-size: 16px;"/>
+        <ComboBox fx:id="pressureComboBox" GridPane.rowIndex="3" GridPane.columnIndex="1"
+                  style="-fx-font-size: 14px; -fx-background-radius: 5px;">
+            <items>
+                <FXCollections fx:factory="observableArrayList">
+                    <String fx:value="Alta"/>
+                    <String fx:value="Media"/>
+                    <String fx:value="Baja"/>
+                </FXCollections>
+            </items>
+        </ComboBox>
+
+        <!-- Estilos para los botones -->
+        <Button text="Agregar Paciente" onAction="#handleAddPatient" GridPane.rowIndex="4" GridPane.columnIndex="1"
+                style="-fx-background-color: #2980b9; -fx-text-fill: white; -fx-font-size: 16px; -fx-background-radius: 10px; -fx-padding: 10px;"/>
+
+        <Button text="Atrás" onAction="#handleBack" GridPane.rowIndex="5" GridPane.columnIndex="1"
+                style="-fx-background-color: #e74c3c; -fx-text-fill: white; -fx-font-size: 16px; -fx-background-radius: 10px; -fx-padding: 10px;"/>
+
+    </GridPane>
+
+</VBox>
