@@ -3,14 +3,19 @@ package org.example.model;
 import java.util.HashMap;
 
 
+import java.util.ArrayList;
+import java.util.HashMap;
+import java.util.List;
+
 public class Nodo {
-    private String criterio;  // Este campo debe existir
+    private String criterio;
     private HashMap<String, Nodo> hijos;
-    private Patient patient;
+    private List<Patient> pacientes;  // Lista de pacientes en lugar de un solo paciente
 
     public Nodo(String criterio) {
         this.criterio = criterio;
         this.hijos = new HashMap<>();
+        this.pacientes = new ArrayList<>();
     }
 
     public void agregarHijo(String clave, Nodo nodo) {
@@ -21,19 +26,19 @@ public class Nodo {
         return hijos.get(clave);
     }
 
-    public void setPaciente(Patient patient) {
-        this.patient = patient;
+    // Añadir un paciente a la lista de pacientes
+    public void agregarPaciente(Patient patient) {
+        this.pacientes.add(patient);
     }
 
-    public Patient getPaciente() {
-        return patient;
+    public List<Patient> getPacientes() {
+        return pacientes;
     }
 
     public boolean esHoja() {
         return hijos.isEmpty();
     }
 
-    // Añadir el método getCriterio() para resolver el error
     public String getCriterio() {
         return criterio;
     }

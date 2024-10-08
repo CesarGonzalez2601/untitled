@@ -1,8 +1,0 @@
-<?xml version="1.0" encoding="UTF-8"?>
-
-<?import javafx.scene.canvas.Canvas?>
-<?import javafx.scene.layout.StackPane?>
-
-<StackPane xmlns="http://javafx.com/javafx" xmlns:fx="http://javafx.com/fxml" fx:controller="org.example.controller.TreeViewController">
-    <Canvas fx:id="treeCanvas" width="800" height="600" />
-</StackPane>

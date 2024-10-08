@@ -10,7 +10,7 @@ public class UserDAO {
     public User authenticate(String usuario, String contraseña) {
         String sql = "SELECT * FROM usuarios WHERE usuario = ? AND contraseña = ?";
 
-        try (Connection conn = DatabaseConnection.getConnection(); // Usamos la conexión desde DatabaseConnection
+        try (Connection conn = DatabaseConnection.getConnection();
              PreparedStatement stmt = conn.prepareStatement(sql)) {
 
             stmt.setString(1, usuario);
@@ -24,6 +24,6 @@ public class UserDAO {
             e.printStackTrace();
         }
 
-        return null;  // Si no se encuentra el usuario
+        return null;
     }
 }

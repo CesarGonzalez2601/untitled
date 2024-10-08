@@ -1,10 +1,18 @@
 <?xml version="1.0" encoding="UTF-8"?>
 
 <?import javafx.scene.control.Button?>
+<?import javafx.scene.image.ImageView?>
 <?import javafx.scene.layout.VBox?>
 
+<?import javafx.scene.image.Image?>
 <VBox alignment="CENTER" spacing="20" xmlns="http://javafx.com/javafx/8" xmlns:fx="http://javafx.com/fxml/1"
       fx:controller="org.example.controller.MainController" style="-fx-background-color: linear-gradient(to bottom, #2c3e50, #4ca1af); -fx-padding: 50px;">
+
+    <ImageView fx:id="logoImageView" fitWidth="150" fitHeight="150">
+        <image>
+            <Image url="/view/home.png"/><!-- Reemplaza el path con la ruta de tu imagen -->
+        </image>
+    </ImageView>
 
     <Button text="Agregar Paciente" fx:id="addPatientButton" onAction="#handleAddPatient"
             style="-fx-font-size: 18px; -fx-font-weight: bold; -fx-text-fill: white; -fx-background-color: #2980b9; -fx-background-radius: 15; -fx-padding: 10 20; -fx-effect: dropshadow(three-pass-box, rgba(0,0,0,0.6), 10, 0, 0, 10);" />
@@ -15,11 +23,7 @@
     <Button text="Editar Pacientes" onAction="#handleEditPatients"
             style="-fx-font-size: 18px; -fx-font-weight: bold; -fx-text-fill: white; -fx-background-color: #e74c3c; -fx-background-radius: 15; -fx-padding: 10 20; -fx-effect: dropshadow(three-pass-box, rgba(0,0,0,0.6), 10, 0, 0, 10);" />
 
-    <!-- Botón para regresar al login -->
     <Button text="Cerrar Sesión" onAction="#handleBackToLogin"
             style="-fx-font-size: 18px; -fx-font-weight: bold; -fx-text-fill: white; -fx-background-color: #f39c12; -fx-background-radius: 15; -fx-padding: 10 20; -fx-effect: dropshadow(three-pass-box, rgba(0,0,0,0.6), 10, 0, 0, 10);" />
 
 </VBox>
-
-
-

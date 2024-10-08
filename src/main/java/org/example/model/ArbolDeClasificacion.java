@@ -7,7 +7,7 @@ public class ArbolDeClasificacion {
     private Nodo raiz;
 
     public ArbolDeClasificacion() {
-        raiz = new Nodo("pacientes");
+        raiz = new Nodo("Pacientes");
     }
 
     public void insertarPaciente(Patient paciente) {
@@ -28,56 +28,25 @@ public class ArbolDeClasificacion {
         }
         actual = actual.obtenerHijo(paciente.getPresionArterial());
 
-        actual.setPaciente(paciente);
+        actual.agregarPaciente(paciente);
     }
 
-    // Método para obtener la lista de todos los pacientes
     public List<Patient> getPacientes() {
         List<Patient> pacientes = new ArrayList<>();
         obtenerPacientesRecursivo(raiz, pacientes);
         return pacientes;
     }
 
-    // Método recursivo para recorrer el árbol y recolectar pacientes
     private void obtenerPacientesRecursivo(Nodo nodo, List<Patient> pacientes) {
         if (nodo == null) return;
 
-        if (nodo.esHoja() && nodo.getPaciente() != null) {
-            pacientes.add(nodo.getPaciente());
-        } else {
-            for (Nodo hijo : nodo.getHijos().values()) {
-                obtenerPacientesRecursivo(hijo, pacientes);
-            }
-        }
-    }
-
-    // Método para contar pacientes por categoría
-    public int contarPacientesPorCategoria(String categoria) {
-        return contarPacientesRecursivo(raiz, categoria);
-    }
-
-    // Método recursivo para contar los pacientes en una categoría específica
-    private int contarPacientesRecursivo(Nodo nodo, String categoria) {
-        int contador = 0;
-
-        if (nodo == null) return contador;
-
-        // Si es una hoja y coincide con la categoría, incrementar el contador
-        if (nodo.esHoja() && nodo.getPaciente() != null) {
-            Patient paciente = nodo.getPaciente();
-            if (categoria.equals(paciente.getGenero()) ||
-                    categoria.equals(paciente.getTipoSangre()) ||
-                    categoria.equals(paciente.getPresionArterial())) {
-                contador++;
-            }
-        } else {
-            // Recorrer los hijos recursivamente
-            for (Nodo hijo : nodo.getHijos().values()) {
-                contador += contarPacientesRecursivo(hijo, categoria);
-            }
+        if (!nodo.getPacientes().isEmpty()) {
+            pacientes.addAll(nodo.getPacientes());
         }
 
-        return contador;
+        for (Nodo hijo : nodo.getHijos().values()) {
+            obtenerPacientesRecursivo(hijo, pacientes);
+        }
     }
 
     public Nodo getRaiz() {

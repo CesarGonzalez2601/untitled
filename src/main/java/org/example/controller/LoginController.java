@@ -8,6 +8,7 @@ import javafx.scene.control.Alert.AlertType;
 import javafx.scene.image.ImageView;
 import javafx.scene.layout.GridPane;
 import javafx.stage.Stage;
+import javafx.stage.StageStyle;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.Parent;
 import javafx.scene.Scene;
@@ -44,18 +45,17 @@ public class LoginController {
             alert.showAndWait();
 
             try {
-                // Cargar la vista principal
+
                 FXMLLoader loader = new FXMLLoader(getClass().getResource("/view/main_view.fxml"));
                 Parent root = loader.load();
 
-                // Obtener la ventana actual y cerrarla
                 Stage stage = (Stage) usernameField.getScene().getWindow();
                 stage.close();
 
-                // Crear una nueva escena y mostrarla
                 Stage mainStage = new Stage();
                 mainStage.setTitle("Panel Principal");
-                mainStage.setScene(new Scene(root));
+                mainStage.setScene(new Scene(root, 1200, 700));
+                mainStage.initStyle(StageStyle.UNDECORATED);
                 mainStage.show();
 
             } catch (Exception e) {
@@ -68,5 +68,11 @@ public class LoginController {
             alert.setContentText("Usuario o contraseña incorrectos.");
             alert.showAndWait();
         }
+    }
+
+    @FXML
+    private void handleExitApp() {
+        Stage stage = (Stage) gridPane.getScene().getWindow();
+        stage.close();
     }
 }

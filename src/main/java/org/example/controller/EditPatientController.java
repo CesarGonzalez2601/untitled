@@ -6,11 +6,10 @@ import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.Parent;
 import javafx.scene.Scene;
-import javafx.scene.control.ComboBox;
-import javafx.scene.control.ListCell;
-import javafx.scene.control.ListView;
-import javafx.scene.control.TextField;
+import javafx.scene.control.*;
+import javafx.scene.layout.AnchorPane;
 import javafx.stage.Stage;
+import javafx.stage.StageStyle;
 import javafx.util.Callback;
 import org.example.model.Patient;
 import org.example.model.PatientDAO;
@@ -41,7 +40,6 @@ public class EditPatientController {
 
         patientComboBox.setItems(patients);
 
-        // Personalizar cómo se muestran los pacientes en el ComboBox
         patientComboBox.setCellFactory(param -> new ListCell<Patient>() {
             @Override
             protected void updateItem(Patient item, boolean empty) {
@@ -76,13 +74,24 @@ public class EditPatientController {
 
             PatientDAO patientDAO = new PatientDAO();
             patientDAO.updatePatient(selectedPatient);
-            System.out.println("Paciente actualizado con éxito.");
+
+            mostrarMensaje("Paciente actualizado con éxito.");
+
+            recargarDatosPaciente(selectedPatient);
         }
     }
 
+    private void recargarDatosPaciente(Patient paciente) {
+        nameField.setText(paciente.getNombre());
+        genderComboBox.setValue(paciente.getGenero());
+        bloodTypeComboBox.setValue(paciente.getTipoSangre());
+        bloodPressureComboBox.setValue(paciente.getPresionArterial());
+    }
+
     @FXML
-    public void handleGoBack() {
-        Stage stage = (Stage) patientComboBox.getScene().getWindow();
+    private void handleGoBack() {
+
+        Stage stage = (Stage) nameField.getScene().getWindow();
         stage.close();
 
         try {
@@ -91,7 +100,9 @@ public class EditPatientController {
 
             Stage mainStage = new Stage();
             mainStage.setTitle("Main");
-            mainStage.setScene(new Scene(root, 800, 600));
+            mainStage.setScene(new Scene(root, 1200, 700));
+            mainStage.initStyle(StageStyle.UNDECORATED);
+            mainStage.centerOnScreen();
             mainStage.show();
         } catch (IOException e) {
             e.printStackTrace();
@@ -102,23 +113,30 @@ public class EditPatientController {
     public void handleClassifyPatient() {
         Patient selectedPatient = patientComboBox.getSelectionModel().getSelectedItem();
         if (selectedPatient != null) {
-            // Cierra la ventana actual
+
             Stage stage = (Stage) patientComboBox.getScene().getWindow();
             stage.close();
 
             try {
-                // Carga el FXML para PacienteCController
+
                 FXMLLoader loader = new FXMLLoader(getClass().getResource("/view/PacienteCView.fxml"));
                 Parent root = loader.load();
 
-                // Obtén el controlador y establece el paciente
+
                 PacienteCController pacienteCController = loader.getController();
                 pacienteCController.setPatient(selectedPatient);
 
-                // Crea y muestra la nueva ventana
+
                 Stage mainStage = new Stage();
                 mainStage.setTitle("Clasificación de Pacientes");
-                mainStage.setScene(new Scene(root, 800, 600)); // Establece el tamaño de la ventana aquí
+
+
+                mainStage.initStyle(StageStyle.UNDECORATED);
+
+                mainStage.setScene(new Scene(root, 1200, 800));
+
+                mainStage.centerOnScreen();
+
                 mainStage.show();
             } catch (IOException e) {
                 e.printStackTrace();
@@ -126,5 +144,33 @@ public class EditPatientController {
         } else {
             System.out.println("No se ha seleccionado ningún paciente.");
         }
+    }
+
+    @FXML
+    private void handleDeletePatient() {
+        Patient selectedPatient = patientComboBox.getValue();
+
+        if (selectedPatient != null) {
+            PatientDAO pacienteDAO = new PatientDAO();
+            boolean deleted = pacienteDAO.eliminarPaciente(selectedPatient.getId());
+
+            if (deleted) {
+
+                mostrarMensaje("El paciente se ha eliminado con éxito.");
+                handleGoBack();
+            } else {
+                System.out.println("Error al eliminar el paciente.");
+            }
+        } else {
+            System.out.println("No se ha seleccionado ningún paciente para eliminar.");
+        }
+    }
+
+    private void mostrarMensaje(String mensaje) {
+        Alert alert = new Alert(Alert.AlertType.INFORMATION);
+        alert.setTitle("Información");
+        alert.setHeaderText(null);
+        alert.setContentText(mensaje);
+        alert.showAndWait();
     }
 }

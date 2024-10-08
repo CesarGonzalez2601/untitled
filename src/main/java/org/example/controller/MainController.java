@@ -6,6 +6,7 @@ import javafx.scene.Node;
 import javafx.scene.Scene;
 import javafx.scene.control.Button;
 import javafx.stage.Stage;
+import javafx.stage.StageStyle;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.Parent;
 
@@ -22,6 +23,11 @@ public class MainController {
 
             Stage stage = new Stage();
             stage.setTitle("Agregar Paciente");
+
+            stage.initStyle(StageStyle.UNDECORATED);
+            stage.setWidth(1200);
+            stage.setHeight(700);
+
             stage.setScene(new Scene(root));
             stage.show();
         } catch (Exception e) {
@@ -39,6 +45,11 @@ public class MainController {
 
             Stage stage = new Stage();
             stage.setTitle("Diagrama de Clasificación de Pacientes");
+
+            stage.initStyle(StageStyle.UNDECORATED);
+            stage.setWidth(1200);
+            stage.setHeight(700);
+
             stage.setScene(new Scene(root));
             stage.show();
         } catch (Exception e) {
@@ -56,6 +67,11 @@ public class MainController {
 
             Stage stage = new Stage();
             stage.setTitle("Editar Paciente");
+
+            stage.initStyle(StageStyle.UNDECORATED);
+            stage.setWidth(1200);
+            stage.setHeight(700);
+
             stage.setScene(new Scene(root));
             stage.show();
         } catch (Exception e) {
@@ -73,6 +89,11 @@ public class MainController {
 
             Stage stage = new Stage();
             stage.setTitle("Clasificación Pacientes");
+
+            stage.initStyle(StageStyle.UNDECORATED);
+            stage.setWidth(1200);
+            stage.setHeight(700);
+
             stage.setScene(new Scene(root));
             stage.show();
         } catch (Exception e) {
@@ -85,25 +106,21 @@ public class MainController {
     @FXML
     private void handleBackToLogin(ActionEvent event) {
         try {
-            // Cargar la vista del login
             FXMLLoader loader = new FXMLLoader(getClass().getResource("/view/login.fxml"));
             Parent loginView = loader.load();
 
-            // Obtener el escenario actual desde el botón o el nodo fuente del evento
             Stage currentStage = (Stage) ((Node) event.getSource()).getScene().getWindow();
-
-            // Establecer la nueva escena del login en el escenario actual
             currentStage.setScene(new Scene(loginView));
 
-            // Mostrar la ventana de login
-            currentStage.show();
+            currentStage.setWidth(1200);
+            currentStage.setHeight(700);
 
+            currentStage.show();
         } catch (Exception e) {
             e.printStackTrace();
         }
     }
 
-    // Método para cerrar la ventana actual
     private void closeWindow(ActionEvent event) {
         Node source = (Node) event.getSource();
         Stage stage = (Stage) source.getScene().getWindow();
